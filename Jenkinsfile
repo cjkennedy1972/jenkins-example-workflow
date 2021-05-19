@@ -85,7 +85,7 @@ pipeline {
           steps {
             // Run the tests in the new test container
             container('test') {
-              sh (script: "./jenkins/run-tests.sh")
+              sh (script: "/home/jenkins/jenkins/run-tests.sh")
             }
           }
         }
