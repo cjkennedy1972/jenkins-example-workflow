@@ -37,7 +37,7 @@ pipeline {
         stage('Push Development Tag') {
           when {
             not {
-              buildingTag
+              buildingTag()
             }
           }
           steps {
@@ -93,7 +93,7 @@ pipeline {
     }
     stage('Push Release Tag') {
       when {
-        buildingTag
+        buildingTag()
       }
       steps {
         container('docker') {
