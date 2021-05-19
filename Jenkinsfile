@@ -24,8 +24,8 @@ pipeline {
           script {
             gitCommit = env.GIT_COMMIT.substring(0,8)
             branchName = env.BRANCH_NAME
-            unixTime = new Date().time / 1000
-            developmentImage = "$branchName-$gitCommit-$unixTime"
+            unixTime = (new Date().time / 1000) as Integer
+            developmentImage = "${branchName}-${gitCommit}-${unixTime}"
           }
           sh "docker build -t ${developmentImage} ./"
         }
