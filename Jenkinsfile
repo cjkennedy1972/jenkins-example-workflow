@@ -9,8 +9,8 @@ jenkinsDockerSecret = 'docker-registry-account'
 gitCommit = ''
 branchName = ''
 unixTime = ''
-developmentImage = ''
-releaseImage = ''
+developmentTag = ''
+releaseTag = ''
 
 pipeline {
   agent {
@@ -25,7 +25,8 @@ pipeline {
             gitCommit = env.GIT_COMMIT.substring(0,8)
             branchName = env.BRANCH_NAME
             unixTime = (new Date().time / 1000) as Integer
-            developmentImage = "${branchName}-${gitCommit}-${unixTime}"
+            developmentTag = "${branchName}-${gitCommit}-${unixTime}"
+            developmentImage = "${dockerRepoUser}/${dockerRepoProj}:${developmentTag}"
           }
           sh "docker build -t ${developmentImage} ./"
         }
@@ -96,6 +97,10 @@ pipeline {
         buildingTag()
       }
       steps {
+        script {
+          releaseTag = env.TAG_NAME
+          releaseImage = "${dockerRepoUser}/${dockerRepoProj}:${releaseTag}"
+        }
         container('docker') {
           withCredentials([[$class: 'UsernamePasswordMultiBinding',
             credentialsId: jenkinsDockerSecret,
