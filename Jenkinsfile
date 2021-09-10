@@ -1,9 +1,9 @@
-dockerRepoHost = 'docker.io'
-dockerRepoUser = 'kingdonb' // (Username must match the value in jenkinsDockerSecret)
+dockerRepoHost = 'harbor.sixwords.dev'
+dockerRepoUser = 'jenkins' // (Username must match the value in jenkinsDockerSecret)
 dockerRepoProj = 'jenkins-example-workflow'
 
 // these refer to a Jenkins secret "id", which can be in Jenkins global scope:
-jenkinsDockerSecret = 'docker-registry-account'
+jenkinsDockerSecret = 'harbor-jenkins-user'
 
 // blank values that are filled in by pipeline steps below:
 gitCommit = ''
